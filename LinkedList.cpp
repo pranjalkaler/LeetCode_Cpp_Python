@@ -110,29 +110,23 @@ int main() {
 	if (list->searchNode(3)) {
 		cout << "3 is in List" << endl;
 	}
-
 	if(!list->searchNode(5)) {
 		cout << "5 is not in list" << endl;
 	}
-
 	if(list->deleteNode(1)) {
 		cout << "1 deleted" << endl;
 	}
-	
 	if(list->deleteNode(4)) {
 		cout << "4 deleted" << endl;
 	}
-	
 	if(list->deleteNode(8)) {
 		cout << "8 deleted" << endl;
 	}
-
 	if(!list->deleteNode(10)) {
 		cout << "Unable to delete 10!" << endl;
 	}
 	list->deleteNode(4);
 	list->deleteNode(8);
-
 	cout << list;
 
 	return 0;
