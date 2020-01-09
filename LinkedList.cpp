@@ -23,22 +23,21 @@ public:
 	void addNode(int data);
 	bool deleteNode(int data);
 	bool searchNode(int data);
+	void insertNode(int data, int afterThis);
 	friend std::ostream& operator << (std::ostream& os, LinkedList* node);
 };
 
 void LinkedList :: addNode(int data) {
 	if(head == nullptr) {
 		head = new Node(data);
+		return;
 	}
-	else {
-		auto tempNode = head;
-		while(tempNode->next != nullptr) {
-			tempNode = tempNode->next;
-		}
-
-		auto newNode = new Node(data);
-		tempNode->next = newNode;
+	auto tempNode = head;
+	while(tempNode->next != nullptr) {
+		tempNode = tempNode->next;
 	}
+	auto newNode = new Node(data);
+	tempNode->next = newNode;
 }
 
 bool LinkedList :: deleteNode(int data) {
@@ -64,6 +63,36 @@ bool LinkedList :: deleteNode(int data) {
 		tempNode = trailNode->next;
 	}
 	return false;
+}
+
+void LinkedList :: insertNode(int data, int afterThis) {
+	if(head == nullptr) {
+		head = new Node(data);
+		return;
+	}
+
+	if(afterThis == -999) {
+		auto newNode = new Node(data);
+		newNode->next = head;
+		head = newNode;
+		return;
+	}
+
+	auto leadNode = head->next;
+	auto trailNode = head;
+	while(leadNode != nullptr) {
+		if(trailNode->data == afterThis) {
+			auto newNode = new Node(data);
+			trailNode->next = newNode;
+			newNode->next = leadNode;
+			return;
+		}
+		trailNode = leadNode;
+		leadNode = leadNode->next;
+	}
+	if(trailNode != nullptr) {
+		trailNode->next = new Node(data);
+	}
 }
 
 bool LinkedList :: searchNode(int data) {
@@ -110,23 +139,36 @@ int main() {
 	if (list->searchNode(3)) {
 		cout << "3 is in List" << endl;
 	}
+
 	if(!list->searchNode(5)) {
 		cout << "5 is not in list" << endl;
 	}
+
 	if(list->deleteNode(1)) {
 		cout << "1 deleted" << endl;
 	}
+	
 	if(list->deleteNode(4)) {
 		cout << "4 deleted" << endl;
 	}
+	
 	if(list->deleteNode(8)) {
 		cout << "8 deleted" << endl;
 	}
+
 	if(!list->deleteNode(10)) {
 		cout << "Unable to delete 10!" << endl;
 	}
 	list->deleteNode(4);
 	list->deleteNode(8);
+
+	cout << list;
+
+	list->insertNode(4, 3);
+	list->insertNode(8, 7);
+	list->insertNode(11, 10);
+	list->insertNode(1, -999);
+
 	cout << list;
 
 	return 0;
