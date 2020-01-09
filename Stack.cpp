@@ -24,7 +24,7 @@ public:
 	void popNode();
 	Node* peek();
 	bool isEmpty();
-	friend std::ostream& operator << (std::ostream& os, Stack* node);
+	friend std::ostream& operator << (std::ostream& os, Stack* stack);
 };
 
 void Stack :: pushNode(int data) {

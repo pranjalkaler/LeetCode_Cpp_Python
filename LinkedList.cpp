@@ -24,7 +24,7 @@ public:
 	bool deleteNode(int data);
 	bool searchNode(int data);
 	void insertNode(int data, int afterThis);
-	friend std::ostream& operator << (std::ostream& os, LinkedList* node);
+	friend std::ostream& operator << (std::ostream& os, LinkedList* list);
 };
 
 void LinkedList :: addNode(int data) {
